@@ -25,15 +25,7 @@ SECRET_KEY = "django-insecure-n^mq^i#fl_7vj08d+wt%t2pdgh2de-h0(2lp9n-&3k2m7dgr-#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ["djangostore.i3a.es"]
-=======
-ALLOWED_HOSTS = [
-    'djangostore.i3a.es'
-]
->>>>>>> e0e85d0cffaf4a1e1a070e27cb39a1ff4350c048
-
-
 # Application definition
 
 INSTALLED_APPS = [
