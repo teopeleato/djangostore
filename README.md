@@ -1,0 +1,2 @@
+# djangostore
+djangostore
