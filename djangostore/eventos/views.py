@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Evento
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'eventos/home.html')
 
 def lista_eventos(request):
     eventos = Evento.objects.all()
