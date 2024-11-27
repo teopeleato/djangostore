@@ -22,8 +22,8 @@ from django.urls import path, include
 from eventos import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('eventos/', include('eventos.urls')),  # Incluir URLs de la app 'eventos'
+    path('admin', admin.site.urls),
+    path('', include('eventos.urls')),  # Incluir URLs de la app 'eventos'
     # path('', views.home, name='home'),
 ]
 
