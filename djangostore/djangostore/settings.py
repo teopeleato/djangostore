@@ -133,10 +133,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'eventos', 'media')
+
+# Ruta donde se almacenan los archivos cargados por los usuarios (como el logo)
 MEDIA_ROOT = BASE_DIR / 'eventos/media/'
 
+# URL que usará el navegador para acceder a los archivos en MEDIA_ROOT
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

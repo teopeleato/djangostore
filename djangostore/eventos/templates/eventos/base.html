@@ -10,11 +10,14 @@
 </head>
 <body>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">I3A Store</a>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">            
+            <a class="navbar-brand" href="#"><img src="{{ MEDIA_URL }}media/eventos/logo_i3a.png" alt="I3A logo" height="80"></a>
+        </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!--
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
@@ -25,11 +28,12 @@
                 </li>
             </ul>
         </div>
+        -->
     </nav>
 
     <!-- Contenido principal -->
     {% block main-content %} {% endblock %}
-
+    
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
