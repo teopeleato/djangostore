@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['djangostore.i3a.es', 'localhost']
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://djangostore.i3a.es']
 
 # Application definition
 
