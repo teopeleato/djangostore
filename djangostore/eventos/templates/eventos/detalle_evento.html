@@ -18,7 +18,7 @@
                     <p class="h3">{{evento.precio}} €</p>
                     <hr>
                     <form method="post">
-                        <!--{% csrf_token %}-->
+                        {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Update price</button>
                     </form>
