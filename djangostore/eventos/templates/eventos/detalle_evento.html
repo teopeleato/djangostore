@@ -1,0 +1,33 @@
+{% extends "eventos/base.html" %}
+
+{%block title %}{{evento.titulo}}{% endblock %}
+
+{% block main-content %} 
+
+<div class="container mt-5">
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+            <img src="{{evento.imagen.url}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8 p-3">
+                <div class="card-body">
+                    <h1 class="card-title">{{evento.titulo}}</h1>
+                    <h2 class="card-text">{{evento.titulo_largo}}</h2>
+                    <p class="card-text"><small class="text-body-secondary">{{evento.fecha_inicio}}</small></p>
+                    <p class="h3">{{evento.precio}} €</p>
+                    <hr>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Update price</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+{% endblock %}
+
+  

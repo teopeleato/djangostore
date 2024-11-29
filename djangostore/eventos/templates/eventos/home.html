@@ -17,37 +17,22 @@
 </div>
 
 <div class="container mt-5">
-    <div class="container mt-4">
         <div class="row">
             {% for evento in eventos %}
 
-            <div class="col-12 col-md-6 col-lg-3 mb-4">
-                <div class="card h-100 text-center">
-                    <img src="{{ evento.imagen.url }}" class="card-img-top p-3" alt="{{ evento.titulo }}">
-                    <div class="card-body bg-light">
-                        <h5 class="card-title">{{ evento.titulo }}</h5>
-                        <p class="card-text">{{ evento.fecha_inicio }}</p>
-                        <a href="{{ item.url }}" class="btn btn-primary">ENTER</a>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="{{ evento.imagen.url }}" class="card-img-top" alt="{{ evento.titulo }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ evento.titulo }}</h5>
-                            <p class="card-text">{{ evento.titulo_largo }}</p>
-                            <p class="card-text"><strong>Precio Base:</strong> ${{ evento.precio_base }}</p>
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <img src="{{ evento.imagen.url }}" class="card-img-top p-3" alt="{{ evento.titulo }}">
+                        <div class="card-body bg-light">
+                            <h5 class="card-title"><a href="{{evento.titulo}}">{{ evento.titulo }}</a></h5>
+                            <p class="card-text">{{ evento.fecha_inicio }}</p>
+                            <a href="{{evento.titulo}}" class="btn btn-primary">ENTER</a>
                         </div>
                     </div>
                 </div>
-            -->
+
             {% endfor %}
         </div>
-    </div>
 </div>
 
 {% endblock %}

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,7 +139,12 @@ STATIC_URL = "static/"
 MEDIA_ROOT = BASE_DIR / 'eventos/media/'
 
 # URL que usará el navegador para acceder a los archivos en MEDIA_ROOT
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
+
+# Asegúrate de que MEDIA_URL esté disponible en todas las plantillas
+TEMPLATES[0]['OPTIONS']['context_processors'] += [
+    'django.template.context_processors.media',
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
