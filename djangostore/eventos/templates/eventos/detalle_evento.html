@@ -15,12 +15,12 @@
                     <h1 class="card-title">{{evento.titulo}}</h1>
                     <h2 class="card-text">{{evento.titulo_largo}}</h2>
                     <p class="card-text"><small class="text-body-secondary">{{evento.fecha_inicio}}</small></p>
-                    <p class="h3">{{evento.precio}} €</p>
+                    <p class="h3"><span id="precio-actual">{{evento.precio}}</span> €</p>
                     <hr>
                     <form method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Update price</button>
+                        <!--<button type="submit" class="btn btn-primary">Update price</button>-->
                     </form>
                 </div>
             </div>
@@ -30,4 +30,61 @@
 
 {% endblock %}
 
+{% block extras %}
+
+
+<script>
+        // Capturar cambio en el campo de precio
+        $('#id_precio').on('change', function () {
+            //var nuevoPrecio = $(this).val();  // Valor seleccionado
+            var nuevoPrecio = $("input[name='precio']:checked").val();
+            console.log("Nuevo precio seleccionado:", nuevoPrecio);
+            var url = "{% url 'actualizar_precio' evento.codigo_i3a %}";  // URL de la vista AJAX
+            var csrfToken = $("input[name=csrfmiddlewaretoken]").val();  // Token CSRF
+
+
+            // Enviar solicitud AJAX
+            /*
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'precio': nuevoPrecio,
+                    'csrfmiddlewaretoken': csrfToken,
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        // Actualizar el precio mostrado en la página
+                        $('#precio-actual').text(response.nuevo_precio);
+                    } else {
+                        alert('Error al actualizar el precio');
+                    }
+                },
+                error: function () {
+                    alert('Error en la solicitud. Nuevo: ' + nuevoPrecio + 'Anterior: '  );
+                }
+            });
+            */
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'precio': nuevoPrecio,
+                    'csrfmiddlewaretoken': csrfToken,
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+
+        });
+    </script>
   
+
+
+
+{% endblock %}
