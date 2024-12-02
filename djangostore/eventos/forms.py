@@ -1,34 +1,35 @@
 from django import forms
 from .models import Evento
 
-class CambiarPrecioFormEvento1(forms.ModelForm):
+# Formulario del evento 1 ***********************************************************
+class PrecioFormEvento1(forms.Form):
+    __student = 100
+    __standard  = 200
     OPCIONES_PRECIOS = [
-        (100, 'Student'),
-        (200, 'Standard'),
+        (__student, 'Student'),
+        (__standard, 'Standard'),
     ]
 
-    precio = forms.ChoiceField(
+    precioModality = forms.ChoiceField(
         widget=forms.RadioSelect,
         choices=OPCIONES_PRECIOS, 
         label="Modality"
     )
-    
-    class Meta:
-        model = Evento
-        fields = ['precio']
 
-class CambiarPrecioFormEvento2(forms.ModelForm):
+    precioFinal = forms.IntegerField(required=False, label='Price', initial=0)
+
+
+# Formulario del evento 2 ***********************************************************
+class PrecioFormEvento2(forms.Form):
     OPCIONES_PRECIOS = [
         (220, 'Student'),
         (550, 'Normal'),
     ]
 
-    precio = forms.ChoiceField(
+    precioModality = forms.ChoiceField(
         widget=forms.RadioSelect,
         choices=OPCIONES_PRECIOS, 
         label="Modality"
     )
 
-    class Meta:
-        model = Evento
-        fields = ['precio']
+    campo_objetivo = forms.IntegerField(required=False, label='Price', initial=550)
