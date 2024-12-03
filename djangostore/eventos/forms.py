@@ -32,4 +32,4 @@ class PrecioFormEvento2(forms.Form):
         label="Modality"
     )
 
-    campo_objetivo = forms.IntegerField(required=False, label='Price', initial=550)
+    precioFinal = forms.IntegerField(required=False, label='Price', initial=0)

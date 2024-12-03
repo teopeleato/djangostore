@@ -37,7 +37,7 @@
 
 
 <script>
-
+/*
     // Capturar cambio en el campo de precio
     $('#precioModality').on('change', function () {
         //var nuevoPrecio = $(this).val();  // Valor seleccionado
@@ -68,6 +68,37 @@
         });
 
     }
+*/
+
+let nuevoPrecio = 0;
+
+ // Función para manejar los cambios en los radio buttons
+ function actualizarPrecio() {
+    console.log("entro en actualizarPrecio()")
+    // Obtener todos los radio buttons
+    const radios = document.getElementsByName('precioModality');
+
+    // Buscar el valor seleccionado
+    radios.forEach(radio => {
+        if (radio.checked) {
+            nuevoPrecio = parseInt(radio.value); // Actualizar el precio 
+        }
+    });
+
+    console.log(nuevoPrecio);
+    // Mostrar el precio seleccionado en el campo visible
+    document.getElementById('precioFinal').textContent = nuevoPrecio;
+}
+
+// Agregar el evento onchange a los radio buttons al cargar la página
+window.onload = function() {
+    const radios = document.getElementsByName('precioModality');
+
+    // Asignar la función actualizarPrecio a cada radio button
+    radios.forEach(radio => {
+        radio.addEventListener('change', actualizarPrecio);
+    });
+};
 
 </script>
   
