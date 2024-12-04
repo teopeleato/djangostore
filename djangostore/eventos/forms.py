@@ -16,7 +16,11 @@ class PrecioFormEvento1(forms.Form):
         label="Modality"
     )
 
-    precioFinal = forms.IntegerField(required=False, label='Price', initial=0)
+    precioFinal = forms.IntegerField(
+        required=False, 
+        label='Price', 
+        initial=__standard
+    )
 
 
 # Formulario del evento 2 ***********************************************************

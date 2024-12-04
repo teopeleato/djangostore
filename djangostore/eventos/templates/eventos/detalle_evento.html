@@ -35,74 +35,38 @@
 
 {% block extras %}
 
-
 <script>
-/*
     // Capturar cambio en el campo de precio
-    $('#precioModality').on('change', function () {
-        //var nuevoPrecio = $(this).val();  // Valor seleccionado
-        var nuevoPrecio = $("input[name='precioModality']:checked").val();
-        console.log("Nuevo precio seleccionado:", nuevoPrecio);
+    $("input[name='precioModality']").on('change', function () {
+        var nuevoPrecio = $(this).val();  // Valor seleccionado
+        //var nuevoPrecio = $("input[name='precioModality']:checked").val();
+        
         var url = "{% url 'detalle_evento' evento.codigo_i3a %}";  // URL de la vista AJAX
         var csrfToken = $("input[name=csrfmiddlewaretoken]").val();  // Token CSRF
-        // Enviar solicitud AJAX
-        
+
+        // Enviar solicitud AJAX para recargar con el nuevo precio               
         $.ajax({
             type: "POST",
             url: url,
             data: {
-                'precio': nuevoPrecio,
+                'nuevoPrecio': nuevoPrecio,
                 'csrfmiddlewaretoken': csrfToken,
             },
+            // Recojo el valor devuelto por la view para actualizar el campo precio
             success: function (response) {
-                if (response.status === 'success') {
-                    // Actualizar el precio mostrado en la página
-                    $('#precioFinal').text(response.nuevo_precio);
+                if (response.mensaje === 'Precio recibido correctamente') {
+                    $("#id_precioFinal").val(response.nuevoPrecio);
                 } else {
-                    alert('Error al actualizar el precio');
+                    console.log("Error en respuesta AJAX: ", response);
                 }
             },
             error: function () {
-                alert('Error en la solicitud. Nuevo: ' + nuevoPrecio + 'Anterior: '  );
+                console.log('Error en la solicitud.');
             }
         });
 
-    }
-*/
-
-let nuevoPrecio = 0;
-
- // Función para manejar los cambios en los radio buttons
- function actualizarPrecio() {
-    console.log("entro en actualizarPrecio()")
-    // Obtener todos los radio buttons
-    const radios = document.getElementsByName('precioModality');
-
-    // Buscar el valor seleccionado
-    radios.forEach(radio => {
-        if (radio.checked) {
-            nuevoPrecio = parseInt(radio.value); // Actualizar el precio 
-        }
     });
 
-    console.log(nuevoPrecio);
-    // Mostrar el precio seleccionado en el campo visible
-    document.getElementById('precioFinal').textContent = nuevoPrecio;
-}
-
-// Agregar el evento onchange a los radio buttons al cargar la página
-window.onload = function() {
-    const radios = document.getElementsByName('precioModality');
-
-    // Asignar la función actualizarPrecio a cada radio button
-    radios.forEach(radio => {
-        radio.addEventListener('change', actualizarPrecio);
-    });
-};
-
-</script>
-  
-
-
+</script> 
 
 {% endblock %}
