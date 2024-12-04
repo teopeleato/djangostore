@@ -1,0 +1,35 @@
+:root {
+    --color1: #0071b3;
+}
+
+h1 {
+    color: var(--color1);
+}
+
+.form-opciones input {
+    margin-top: 1em;
+}
+
+.precio-final {
+    border: none;             
+    background-color: #fff;  
+    font-size: 2em;    
+    font-weight: bold;   
+    width: 80px;     
+}
+
+.precio-final:disabled {
+    color: var(--color1);
+}
+
+.precio-final:focus {
+    color: var(--color1);
+    outline: none;            
+    background-color: #fff;  
+}
+
+.euro-symbol {
+    color: var(--color1);
+    font-size: 2em;
+    margin: -20px;
+}

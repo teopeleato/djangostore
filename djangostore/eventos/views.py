@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Evento
-from .forms import PrecioFormEvento1, PrecioFormEvento2
+from .forms import PrecioFormEvento1, PrecioFormEvento2, PrecioFormEvento3
 from django.views.decorators.csrf import csrf_exempt
 import logging
 
@@ -36,6 +36,8 @@ def detalle_evento(request, codigo_i3a):
         PrecioForm = PrecioFormEvento1
     if evento.codigo_i3a == 2:
         PrecioForm = PrecioFormEvento2
+    if evento.codigo_i3a == 3:
+        PrecioForm = PrecioFormEvento3
 
     # Cargo el evento con su formulario
     form = PrecioForm() 
