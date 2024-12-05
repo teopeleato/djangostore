@@ -44,21 +44,38 @@ a {
 }
 
 /* Formularios */
-.form-opciones input {
-    margin-top: 10px;
+/* .form-check-input {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+} */
+
+.fieldWrapper:has(.check-opcionales) {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse; /* Invierte el orden visual */
+    justify-content: flex-end; /* alinear a la izda */
+    gap: 10px; /* Espacio entre el label y el input */
+    padding-left: 1rem;
+}
+
+.check-opcionales input {
+    margin: 0; /* Asegura que no haya márgenes extra */
 }
 
 /* Precio final */
 .precio-final {
     border: none;             
-    background-color: var(--color-fondo);
-    font-weight: bold;   
+    background-color: var(--color-fondo);     
     width: 100px;   
-    font-size: 2.5rem; 
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 2.3rem;
+    padding: 0.5em 0;
 }
-.precio-final-letras {
+/* .precio-final-letras {
     font-size: 1.2rem;
-}
+} */
 .precio-final:disabled {
     color: var(--color1);
 }
@@ -67,10 +84,16 @@ a {
     outline: none;            
     background-color: #fff;  
 }
-.euro-symbol {
+/* .euro-symbol {
     color: var(--color1);
     font-size: 2.5em;
     margin-left: 0.5em;
+} */
+
+.fieldWrapper:has(.precio-final) {
+    display: flex;
+    align-items: baseline; 
+    gap: 10px; /* Espaciado entre el label y el input */
 }
 
 /* Responsive */

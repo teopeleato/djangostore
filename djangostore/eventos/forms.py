@@ -1,5 +1,6 @@
 from django import forms
 from .models import Evento
+from django.utils.safestring import mark_safe
 
 # Formulario del evento 1 **********************************************************************************************************************
 class PrecioFormEvento1(forms.Form):
@@ -74,20 +75,55 @@ class PrecioFormEvento3(forms.Form):
         (__standard_and_member, f'Standard and member - {__standard_and_member} € (-{__descuento_member}% inc.)'),
     ]
 
+    # Campos que definen el precio
+
     precioModality = forms.ChoiceField(
-        widget = forms.RadioSelect,
+        widget = forms.RadioSelect(attrs={
+            'class': 'p-3',
+        }),
         choices = OPCIONES_PRECIOS, 
         initial = __standard,
-        label = "Please select the corresponding option:"
-    )    
+        label = "Please select the corresponding option:",          
+    )  
+
+    # Campos que no influyen en el precio, informativos
+
+    texto_informativo = forms.CharField(
+        initial="Please mark your optional options:",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'readonly': 'readonly',  # Hace que el campo no sea editable
+            'class': 'form-control-plaintext',
+        }),
+        label="",
+    )
+
+    comida = forms.BooleanField(
+        required = False,  
+        label = "Lunch 5 June", 
+        widget = forms.CheckboxInput(attrs={
+            'class': 'check-opcionales',
+        }),
+    )  
+
+    cena = forms.BooleanField(
+        widget = forms.CheckboxInput(attrs={
+            'class': 'check-opcionales',
+        }),
+        required = False,  
+        label = "Dinner 5 June",         
+    )
+
+    # Precio final
 
     precioFinal = forms.IntegerField(
         required = False, 
-        label = 'Amount to pay:', 
+        label=mark_safe('Amount to pay in &#8364;:'),  # Marca el label como HTML seguro
         initial = __standard,
         widget = forms.NumberInput(attrs={
             'class': 'precio-final',
-            'disabled': 'disabled'
+            'disabled': 'disabled',
+            'readonly': 'readonly'
         }),        
     )
     

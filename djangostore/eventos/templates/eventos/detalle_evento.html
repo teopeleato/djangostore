@@ -19,40 +19,76 @@
             </div>
         </div>           
         <hr class="m-0">
-        <div class="row g-0 fondo align-items-end p-3">
-            <div class="col-12 col-md-6 col-lg-6 mb-4">
+        <div class="row g-0 fondo  p-3">
+            <div class="col-12 col-md-6 col-lg-6 p-3"> 
+                    {{evento.descripcion}}
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 p-3">   
                 <form method="post">
                     {% csrf_token %}
-                    {% comment %} {{ form.as_p }} {% endcomment %}
+                        {% for field in form %}
+                            <div class="fieldWrapper pl-3 ">
+                                {{ field.errors }}
+                                {{ field.label_tag }} {{ field }}
+                            </div>
+                        {% endfor %}
+                        <div class="mt-3 end-to-center">
+                            <button type="submit" class="btn btn-i3a ">Continue</button>
+                        </div>  
+                </form>
+            </div>
+            
+        </div>    
+    </div>
+</div>
+{% comment %} 
                     <div class="form-opciones">
-                    
-                        <!-- 'precioModality' -->                            
-                        <label class="mb-2" for="{{ form.precioModality.id_for_label }}">{{ form.precioModality.label }}</label>
-                        {{ form.precioModality }}   
 
-                        <!-- 'precioFinal' -->
-                         <div class="left_to_center">
-                            <label class="precio-final-letras" for="{{ form.precioFinal.id_for_label }}">{{ form.precioFinal.label }}</label>
-                            <span class="euro-symbol precio-final-letras">€</span>
-                            {{ form.precioFinal }}
+                        <div class="row g-0 fondo  p-3">
+                            <div class="col-12 col-md-4 col-lg-4">   
+                                <fieldset>
+                                    <legend>Please select your modality</legend>                 
+                                    <!-- 'precioModality' -->                            
+                                    <label class="mb-2" for="{{ form.precioModality.id_for_label }}">{{ form.precioModality.label }}</label>
+                                    {{ form.precioModality }} 
+                                </fieldset>   
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4"> 
+                                <fieldset>
+                                    <legend>Please mark your optional options</legend>
+                                    <div>
+                                        <!-- 'comida' -->
+                                        {{ form.comida }} 
+                                        <label class="mb-2" for="{{ form.comida.id_for_label }}">{{ form.comida.label }}</label>   
+                                    </div>
+                                    <div>
+                                        <!-- 'cena' -->
+                                        {{ form.cena }} 
+                                        <label class="mb-2" for="{{ form.cena.id_for_label }}">{{ form.cena.label }}</label>    
+                                    </div>
+                                </fieldset>                            
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4   align-items-end "> 
+                            
+                                <!-- 'precioFinal' -->
+                                <div class="end-to-center">
+                                    <label class="precio-final-letras" for="{{ form.precioFinal.id_for_label }}">{{ form.precioFinal.label }}</label>
+                                    <span class="euro-symbol precio-final-letras">€</span>
+                                    {{ form.precioFinal }}
+                                </div>
+        
+                                <div class="end-to-center">
+                                    <button type="submit" class="btn btn-i3a mt-3 ">Continue</button>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
-                </form>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 mb-6 end-to-center">
-                <form method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-i3a mt-3">Continue</button>
-                </form>
-            </div>
-        </div>   
-    </div>    
-</div>
+                </form> {% endcomment %}
+        
 
-<div class="container p-3">
-    <p>{{evento.descripcion}}</p>
-</div>
+    
+
+
 
 {% endblock %}
 
