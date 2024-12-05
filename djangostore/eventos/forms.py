@@ -1,7 +1,7 @@
 from django import forms
 from .models import Evento
 
-# Formulario del evento 1 ***********************************************************
+# Formulario del evento 1 **********************************************************************************************************************
 class PrecioFormEvento1(forms.Form):
     __student = 100
     __standard  = 200
@@ -14,7 +14,8 @@ class PrecioFormEvento1(forms.Form):
     precioModality = forms.ChoiceField(
         widget = forms.RadioSelect,
         choices = OPCIONES_PRECIOS, 
-        label = "Modality:"
+        initial = __standard,
+        label = "Please select the corresponding option:"
     )
 
     precioFinal = forms.IntegerField(
@@ -27,8 +28,7 @@ class PrecioFormEvento1(forms.Form):
         }),        
     )
 
-
-# Formulario del evento 2 ***********************************************************
+# Formulario del evento 2 **********************************************************************************************************************
 class PrecioFormEvento2(forms.Form):
     __student = 350
     __standard  = 580
@@ -41,7 +41,8 @@ class PrecioFormEvento2(forms.Form):
     precioModality = forms.ChoiceField(
         widget = forms.RadioSelect,
         choices = OPCIONES_PRECIOS, 
-        label = "Modality:"
+        initial = __standard,
+        label = "Please select the corresponding option:"
     )
 
     precioFinal = forms.IntegerField(
@@ -54,9 +55,9 @@ class PrecioFormEvento2(forms.Form):
         }),        
     )
 
-# Formulario del evento 3 ***********************************************************
+# Formulario del evento 3 **********************************************************************************************************************
 class PrecioFormEvento3(forms.Form):
-    __student = 350
+    __student = 90
     __standard  = 500
 
     # Descuento a members
@@ -76,19 +77,17 @@ class PrecioFormEvento3(forms.Form):
     precioModality = forms.ChoiceField(
         widget = forms.RadioSelect,
         choices = OPCIONES_PRECIOS, 
+        initial = __standard,
         label = "Please select the corresponding option:"
-    )
-
-    
+    )    
 
     precioFinal = forms.IntegerField(
         required = False, 
-        label = 'Price:', 
+        label = 'Amount to pay:', 
         initial = __standard,
         widget = forms.NumberInput(attrs={
             'class': 'precio-final',
             'disabled': 'disabled'
         }),        
     )
-
     

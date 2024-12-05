@@ -5,8 +5,7 @@
 {% block main-content %} 
 <div class="jumbotron jumbotron-fluid bg-light mt-3 py-3">
     <div class="container ">
-    <h1 class="display-4">I3A Store</h1>
-    <p style="text-align:left;">In this website you can&nbsp;register&nbsp;for&nbsp;the&nbsp;<strong>events</strong> or <strong>conferences</strong> organized by the institute.</p>
+    <p style="text-align:left;">In this website you can&nbsp;register&nbsp;for&nbsp;the&nbsp;<strong>events</strong> or <strong>conferences</strong> organized by the I3A institute.</p>
     <ul>
         <li>Add the corresponding product to the cart, and proceed to payment. The cart only allows one registration in order to collect the data of each participant. Please make <strong>one registration per participant</strong>.</li>
         <li>You can use <strong>credit card</strong> or <strong>bank transfer</strong>.&nbsp;You can also choose the University of Zaragoza Internal Payment option .</li>
@@ -20,13 +19,13 @@
         <div class="row">
             {% for evento in eventos %}
 
-                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="col-12 col-md-4 col-lg-3 mb-2">
                     <div class="card h-100 text-center">
                         <img src="{{ evento.imagen.url }}" class="card-img-top p-3" alt="{{ evento.titulo }}">
                         <div class="card-body bg-light">
                             <h5 class="card-title"><a href="{{evento.codigo_i3a}}">{{ evento.titulo }}</a></h5>
                             <p class="card-text">{{ evento.fecha_inicio }}</p>
-                            <a href="{{evento.codigo_i3a}}" class="btn btn-primary">ENTER</a>
+                            <a href="{{evento.codigo_i3a}}" class="btn btn-i3a btn-i3a-small">ENTER</a>
                         </div>
                     </div>
                 </div>

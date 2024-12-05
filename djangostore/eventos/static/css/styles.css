@@ -1,35 +1,92 @@
 :root {
     --color1: #0071b3;
+    --color2: #0f8bd3 ;
+    --color-fondo: #f8f9fa;
 }
 
 h1 {
     color: var(--color1);
 }
 
-.form-opciones input {
-    margin-top: 1em;
+a {
+    color: var(--color1) !important;
+    text-decoration: none !important;
 }
 
+.fondo {
+    background-color: var(--color-fondo);
+}
+
+/* Alineaciones */
+.left_to_center {
+    text-align: left !important;
+}
+.end-to-center {
+    text-align: right !important;
+}
+.end-to-left {
+    text-align: right !important;
+}
+
+/* Botones */
+.btn-i3a {    
+    color: #fff !important;
+    background-color: var(--color1) !important;
+    border-color: var(--color1) !important;
+    font-size: 1.5rem !important;
+}
+.btn-i3a-small {    
+    font-size: 1.2rem !important;
+}
+.btn-i3a:hover {
+    background-color: var(--color2) !important;
+    border-color: var(--color2) !important;
+}
+
+/* Formularios */
+.form-opciones input {
+    margin-top: 10px;
+}
+
+/* Precio final */
 .precio-final {
     border: none;             
-    background-color: #fff;  
-    font-size: 2em;    
+    background-color: var(--color-fondo);
     font-weight: bold;   
-    width: 80px;     
+    width: 100px;   
+    font-size: 2.5rem; 
 }
-
+.precio-final-letras {
+    font-size: 1.2rem;
+}
 .precio-final:disabled {
     color: var(--color1);
 }
-
 .precio-final:focus {
     color: var(--color1);
     outline: none;            
     background-color: #fff;  
 }
-
 .euro-symbol {
     color: var(--color1);
-    font-size: 2em;
-    margin: -20px;
+    font-size: 2.5em;
+    margin-left: 0.5em;
+}
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+    .end-to-center {
+        text-align: center !important;
+    }
+    .end-to-left {
+        text-align: left !important;
+    }
+    .left_to_center {
+        text-align: center !important;
+    }
+    .navbar-text {
+        display: block;
+        width: 100%;
+    }
+    img {max-height: 100px;}
 }
