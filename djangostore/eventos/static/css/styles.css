@@ -33,7 +33,7 @@ a {
     color: #fff !important;
     background-color: var(--color1) !important;
     border-color: var(--color1) !important;
-    font-size: 1.5rem !important;
+    font-size: 2rem !important;
 }
 .btn-i3a-small {    
     font-size: 1.2rem !important;
@@ -44,33 +44,56 @@ a {
 }
 
 /* Formularios */
-/* .form-check-input {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
+/* .etiqueta {
+    margin-top: 0.5em;
 } */
 
-.fieldWrapper:has(.check-opcionales) {
+.campo {
+    margin-top: 0.5em;
+    margin-left: 1em;
+}
+
+.fieldWrapper {
+    padding-left: 1em;
+    margin-top: 2em;
+}
+
+.question {
+    border-left: 8px solid var(--color1);
+}
+
+/* .fieldWrapper:has(.check-opcionales) {
     display: flex;
     align-items: center;
-    flex-direction: row-reverse; /* Invierte el orden visual */
-    justify-content: flex-end; /* alinear a la izda */
-    gap: 10px; /* Espacio entre el label y el input */
-    padding-left: 1rem;
-}
+    flex-direction: row-reverse; 
+    justify-content: flex-end; 
+    gap: 10px; 
+} */
 
 .check-opcionales input {
     margin: 0; /* Asegura que no haya márgenes extra */
 }
 
+textarea {
+    width: 50%;
+}
+
 /* Precio final */
+
+.fieldWrapper:has(.precio-final) {
+    display: flex;
+    align-items: baseline; 
+    gap: 10px; /* Espaciado entre el label y el input */
+    border-left: none;
+    font-size: 2em;
+}
 .precio-final {
     border: none;             
     background-color: var(--color-fondo);     
     width: 100px;   
     font-weight: 500;
     line-height: 1.2;
-    font-size: 2.3rem;
+    font-size: 3rem;
     padding: 0.5em 0;
 }
 /* .precio-final-letras {
@@ -83,17 +106,6 @@ a {
     color: var(--color1);
     outline: none;            
     background-color: #fff;  
-}
-/* .euro-symbol {
-    color: var(--color1);
-    font-size: 2.5em;
-    margin-left: 0.5em;
-} */
-
-.fieldWrapper:has(.precio-final) {
-    display: flex;
-    align-items: baseline; 
-    gap: 10px; /* Espaciado entre el label y el input */
 }
 
 /* Responsive */
@@ -111,5 +123,10 @@ a {
         display: block;
         width: 100%;
     }
-    img {max-height: 100px;}
+    img {
+        max-height: 100px;
+    }
+    textarea {
+        width: 100%;
+    }
 }
