@@ -88,7 +88,7 @@ class PrecioFormEvento3(forms.Form):
 
     precioFinal = forms.IntegerField(
         required = False, 
-        label=mark_safe('Amount to pay in &#8364;:'),  # Marca el label como HTML seguro
+        label=mark_safe('Total to pay in &#8364;:'),  # Marca el label como HTML seguro
         initial = __standard,
         widget = forms.NumberInput(attrs={
             'class': 'precio-final',

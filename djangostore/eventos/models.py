@@ -8,6 +8,7 @@ class Evento(models.Model):
     imagen = models.ImageField(upload_to='eventos/')
     fecha_inicio = models.DateField(default=datetime.date.today)  
     fecha_fin = models.DateField(default=datetime.date.today)
+    web = models.TextField(default='#')
     descripcion = models.TextField(default='more info...')
     activo = models.BooleanField(default=False)
 

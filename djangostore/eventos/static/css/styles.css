@@ -55,11 +55,11 @@ a {
 
 .fieldWrapper {
     padding-left: 1em;
-    margin-top: 2em;
+    margin-top: 30px;
 }
 
 .question {
-    border-left: 8px solid var(--color1);
+    border-left: 7px solid var(--color1);
 }
 
 /* .fieldWrapper:has(.check-opcionales) {
@@ -83,9 +83,10 @@ textarea {
 .fieldWrapper:has(.precio-final) {
     display: flex;
     align-items: baseline; 
+    justify-content: flex-end;
     gap: 10px; /* Espaciado entre el label y el input */
     border-left: none;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .precio-final {
     border: none;             

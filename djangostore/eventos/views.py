@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 def home(request):
-    eventos = Evento.objects.all()
+    eventos = Evento.objects.filter(activo=True)
     return render(request, 'eventos/home.html', {'eventos': eventos})
 
 '''
