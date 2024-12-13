@@ -8,13 +8,14 @@
     <div class="card ">
         <div class="row g-0  align-items-center left_to_center ">
             <div class="col-md-2 p-3">
-                <img src="{{evento.imagen.url}}" class="img-fluid rounded-start" alt="logo">
+                <img src="{{evento.imagen.url}}" class="img-fluid rounded-start img-detalle" alt="logo">
             </div>
             <div class="col-md-10 ">
                 <div class="p-3">
                     <h1 class="card-title">{{evento.titulo}}</h1>
                     <h3 class="card-text">{{evento.titulo_largo}}</h3>
-                    <p class="card-text"><small class="text-body-secondary">{{evento.fecha_inicio}}</small></p>   
+                    <p class="card-text"><small class="text-body-secondary">{{evento.fecha_inicio}}</small><br>
+                    <small class="text-body-secondary">Web: <a href="{{evento.web}}" target="_blank">{{evento.web}}</a></small></p>   
                 </div>      
             </div>
         </div>           
@@ -25,10 +26,10 @@
                 <div class="fieldWrapper">
                     {{evento.descripcion|safe}}
                 </div>
-                <p class="h4">Website:</p>
+                <!--<p class="h4">Website:</p>
                 <div class="fieldWrapper">
                     {{evento.web|safe}}
-                </div>
+                </div>-->
             </div>
             <div class="p-3">   
                 <form method="post">

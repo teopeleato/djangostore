@@ -44,13 +44,10 @@ a {
 }
 
 /* Formularios */
-/* .etiqueta {
-    margin-top: 0.5em;
-} */
 
 .campo {
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 10px;
 }
 
 .fieldWrapper {
@@ -71,7 +68,7 @@ a {
 } */
 
 .check-opcionales input {
-    margin: 0; /* Asegura que no haya márgenes extra */
+    margin: 0; 
 }
 
 textarea {
@@ -79,12 +76,11 @@ textarea {
 }
 
 /* Precio final */
-
 .fieldWrapper:has(.precio-final) {
     display: flex;
     align-items: baseline; 
     justify-content: flex-end;
-    gap: 10px; /* Espaciado entre el label y el input */
+    gap: 5px; 
     border-left: none;
     font-size: 1.5em;
 }
@@ -95,7 +91,7 @@ textarea {
     font-weight: 500;
     line-height: 1.2;
     font-size: 3rem;
-    padding: 0.5em 0;
+    /* padding: 0.5em 0; */
 }
 /* .precio-final-letras {
     font-size: 1.2rem;
@@ -124,7 +120,7 @@ textarea {
         display: block;
         width: 100%;
     }
-    img {
+    img-detalle {
         max-height: 100px;
     }
     textarea {
