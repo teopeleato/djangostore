@@ -8,22 +8,31 @@ class PrecioFormEvento3(forms.Form):
 
     # Obtener la ruta de la carpeta que contiene el archivo forms.py
     forms_dir = os.path.dirname(os.path.abspath(__file__))  # Carpeta 'forms'
+       
     
-    # Ruta al archivo options.json dentro de la carpeta 'files'
-    json_file_path = os.path.join(forms_dir, '../files/options.json')
+    # Ruta relativa al archivo JSON desde el archivo actual
+    json_file_path = os.path.join(os.path.dirname(__file__), '../static/files/options.json')
 
+    # Normaliza y convierte a absoluta
+    json_file_path = os.path.abspath(json_file_path)
+
+    print(f"DEBUG - Valor de json_file_path: {json_file_path}")
+    
     try:
         # Cargar datos del JSON
         with open(json_file_path, 'r') as f:
             data = json.load(f)
+            print(f"DEBUG - Contenido del archivo JSON: {data}")
     except FileNotFoundError:
         data = {"comidas": [], "precios": []}  # Valores predeterminados vacíos
+        print(f"ERROR - Archivo JSON no encontrado: {json_file_path}")
 
     OPCIONES_COMIDAS = [(item['value'], item['label']) for item in data.get('comidas', [])]
     OPCIONES_PRECIOS = [(item['value'], item['label']) for item in data.get('precios', [])]
 
     # Definir el valor inicial para 'precioModality' desde el JSON
     precio_inicial = data.get('precio_inicial')
+    print(f"DEBUG - Valor de precio_inicial: {precio_inicial}")
 
     '''
     OPCIONES_COMIDAS = [ 
