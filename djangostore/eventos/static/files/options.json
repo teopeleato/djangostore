@@ -1,0 +1,13 @@
+{
+    "comidas": [
+        {"value": 1, "label": "Yes"},
+        {"value": 0, "label": "No"}
+    ],
+    "precios": [
+        {"value": 90, "label": "Student - 90 €"},
+        {"value": 500, "label": "Standard - 500 €"},
+        {"value": 81, "label": "Student and member - 81 € (-10% inc.)"},
+        {"value": 450, "label": "Standard and member - 450 € (-10% inc.)"}
+    ],
+    "precio_inicial": 500
+}

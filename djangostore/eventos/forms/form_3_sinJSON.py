@@ -1,31 +1,9 @@
 from django import forms
 from ..models import Evento
 from django.utils.safestring import mark_safe
-import os
-import json
 
 class PrecioFormEvento3(forms.Form):
 
-    # Obtener la ruta de la carpeta que contiene el archivo forms.py
-    forms_dir = os.path.dirname(os.path.abspath(__file__))  # Carpeta 'forms'
-    
-    # Ruta al archivo options.json dentro de la carpeta 'files'
-    json_file_path = os.path.join(forms_dir, '../files/options.json')
-
-    try:
-        # Cargar datos del JSON
-        with open(json_file_path, 'r') as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        data = {"comidas": [], "precios": []}  # Valores predeterminados vacíos
-
-    OPCIONES_COMIDAS = [(item['value'], item['label']) for item in data.get('comidas', [])]
-    OPCIONES_PRECIOS = [(item['value'], item['label']) for item in data.get('precios', [])]
-
-    # Definir el valor inicial para 'precioModality' desde el JSON
-    precio_inicial = data.get('precio_inicial')
-
-    '''
     OPCIONES_COMIDAS = [ 
     (1,'Yes'),
     (0,'No'),
@@ -46,33 +24,41 @@ class PrecioFormEvento3(forms.Form):
         (__student_and_member, f'Student and member - {__student_and_member} € (-{__descuento_member}% inc.)'),
         (__standard_and_member, f'Standard and member - {__standard_and_member} € (-{__descuento_member}% inc.)'),
     ]
-    '''
-    
-
 
     # Campos que definen el precio ************************************************************************************************************************
 
-    """ precioModality = forms.ChoiceField(
+    precioModality = forms.ChoiceField(
         widget = forms.RadioSelect(),
         choices = OPCIONES_PRECIOS, 
         initial = __standard,
         label = "Modality:",          
-    )  """ 
-    precioModality = forms.ChoiceField(
-        widget = forms.RadioSelect(),
-        choices = OPCIONES_PRECIOS, 
-        initial=precio_inicial,  
-        label = "Modality:",          
-    )
+    )  
 
     # Campos que no influyen en el precio, informativos ************************************************************
+
+    """ texto_informativo = forms.CharField(
+        initial="Please mark your optional options:",
+        required=False,
+        widget=forms.TextInput(attrs={
+            'readonly': 'readonly',  # Hace que el campo no sea editable
+            'class': 'form-control-plaintext',
+        }),
+        label="",
+    ) """
 
     papers = forms.CharField(
         required=False,
         label="If you present paper/s, tell us the number ID of it or them:",
     )
 
-    
+    """ comida = forms.BooleanField(
+        required = False,  
+        widget = forms.CheckboxInput(attrs={
+            'class': 'check-opcionales',
+        }),
+        label = "Lunch 5 June", 
+    )  
+ """
 
     comida = forms.ChoiceField(
         widget = forms.RadioSelect(),
@@ -102,8 +88,7 @@ class PrecioFormEvento3(forms.Form):
     precioFinal = forms.IntegerField(
         required = False, 
         label=mark_safe('Total to pay in &#8364;:'),  # Marca el label como HTML seguro
-        # initial = __standard,
-        initial=precio_inicial,
+        initial = __standard,
         widget = forms.NumberInput(attrs={
             'class': 'precio-final',
             'disabled': 'disabled',
