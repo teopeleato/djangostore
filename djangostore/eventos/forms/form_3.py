@@ -16,7 +16,7 @@ class PrecioFormEvento3(forms.Form):
     # Normaliza y convierte a absoluta
     json_file_path = os.path.abspath(json_file_path)
 
-    print(f"DEBUG - Valor de json_file_path: {json_file_path}")
+    # print(f"DEBUG - Valor de json_file_path: {json_file_path}")
     
     try:
         # Cargar datos del JSON
@@ -24,15 +24,34 @@ class PrecioFormEvento3(forms.Form):
             data = json.load(f)
             print(f"DEBUG - Contenido del archivo JSON: {data}")
     except FileNotFoundError:
-        data = {"comidas": [], "precios": []}  # Valores predeterminados vacíos
-        print(f"ERROR - Archivo JSON no encontrado: {json_file_path}")
+        print(f"ERROR - No se encontró el archivo JSON en: {json_file_path}")
+        data = {"eventos": []}
 
-    OPCIONES_COMIDAS = [(item['value'], item['label']) for item in data.get('comidas', [])]
-    OPCIONES_PRECIOS = [(item['value'], item['label']) for item in data.get('precios', [])]
+    #OPCIONES_COMIDAS = [(item['value'], item['label']) for item in data.get('comidas', [])]
+    #OPCIONES_PRECIOS = [(item['value'], item['label']) for item in data.get('precios', [])]
 
     # Definir el valor inicial para 'precioModality' desde el JSON
-    precio_inicial = data.get('precio_inicial')
-    print(f"DEBUG - Valor de precio_inicial: {precio_inicial}")
+    #precio_inicial = data.get('precio_inicial')
+    #print(f"DEBUG - Valor de precio_inicial: {precio_inicial}")
+
+    # Código del evento deseado
+    #codigo_evento_deseado = 3  
+    print(f"DEBUG - Valor de Evento.codigo_i3a: {Evento.codigo_i3a}")
+
+
+    # Filtrar el evento con el código correspondiente
+    evento = next((evento for evento in data.get("eventos", []) if evento["codigo_evento"] == Evento.codigo_i3a), None)
+
+    if evento:
+        print(f"DEBUG - Evento seleccionado: {evento}")
+        precio_inicial = evento.get("precio_inicial", 500)
+        OPCIONES_PRECIOS = [(item['value'], item['label']) for item in evento.get("precios", [])]
+        OPCIONES_COMIDAS = [(item['value'], item['label']) for item in evento.get("comidas", [])]
+    else:
+        print(f"ERROR - No se encontró un evento con codigo_evento=")
+        precio_inicial = 500
+        OPCIONES_PRECIOS = []
+        OPCIONES_COMIDAS = []
 
     '''
     OPCIONES_COMIDAS = [ 

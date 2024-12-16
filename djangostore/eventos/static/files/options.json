@@ -1,14 +1,30 @@
 {
-    "codigo_i3a": 3,
-    "comidas": [
-        {"value": 1, "label": "Yes"},
-        {"value": 0, "label": "No"}
-    ],
-    "precios": [
-        {"value": 90, "label": "Student - 90 €"},
-        {"value": 500, "label": "Standard - 500 €"},
-        {"value": 81, "label": "Student and member - 81 € (-10% inc.)"},
-        {"value": 450, "label": "Standard and member - 450 € (-10% inc.)"}
-    ],
-    "precio_inicial": 500
+    "eventos": [
+        {
+            "codigo_i3a": 2,
+            "comidas": [
+                {"value": 1, "label": "Yes"},
+                {"value": 0, "label": "No"}
+            ],
+            "precios": [
+                {"value": 50, "label": "Student - 50 €"},
+                {"value": 200, "label": "Standard - 200 €"}
+            ],
+            "precio_inicial": 200
+        },
+        {
+            "codigo_i3a": 3,
+            "comidas": [
+                {"value": 1, "label": "Yes"},
+                {"value": 0, "label": "No"}
+            ],
+            "precios": [
+                {"value": 90, "label": "Student - 90 €"},
+                {"value": 500, "label": "Standard - 500 €"},
+                {"value": 81, "label": "Student and member - 81 € (-10% inc.)"},
+                {"value": 450, "label": "Standard and member - 450 € (-10% inc.)"}
+            ],
+            "precio_inicial": 500
+        }
+    ]
 }
