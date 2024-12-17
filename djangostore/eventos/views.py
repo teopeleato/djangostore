@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Evento
-from .forms import PrecioFormEvento1, PrecioFormEvento2, PrecioFormEvento3
+from .forms import PrecioFormEvento1, PrecioFormEvento2, PrecioFormEvento3, PrecioFormEvento
 from django.views.decorators.csrf import csrf_exempt
 import logging
 
@@ -32,15 +32,16 @@ def detalle_evento(request, codigo_i3a):
         })
 
     # Lógica para seleccionar formulario según el evento, con solicitudes GET normales
-    if evento.codigo_i3a == 1:
+    """ if evento.codigo_i3a == 1:
         PrecioForm = PrecioFormEvento1
     if evento.codigo_i3a == 2:
         PrecioForm = PrecioFormEvento2
     if evento.codigo_i3a == 3:
-        PrecioForm = PrecioFormEvento3
+        PrecioForm = PrecioFormEvento3 """
+    PrecioForm = PrecioFormEvento
 
     # Cargo el evento con su formulario
-    form = PrecioForm() 
+    form = PrecioForm(codigo_i3a=evento.codigo_i3a) 
     return render(request, 'eventos/detalle_evento.html', {
         'evento': evento, 
         'form': form

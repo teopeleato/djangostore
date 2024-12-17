@@ -4,7 +4,7 @@ import os
 import json
 
 
-class PrecioFormEvento3(forms.Form):
+class PrecioFormEvento(forms.Form):
     # Constructor
     def __init__(self, codigo_i3a=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -38,17 +38,22 @@ class PrecioFormEvento3(forms.Form):
         return next((evento for evento in data.get("eventos", []) if evento["codigo_i3a"] == codigo_i3a), None)
 
     def configure_dynamic_fields(self, evento):
+
+        opciones_social= [ 
+            (1,'Yes'),
+            (0,'No'),
+        ]
+        
         """Configura los campos dinámicos según los datos del evento."""
         if evento:
             print(f"DEBUG - Evento seleccionado: {evento}")
-            precio_inicial = evento.get("precio_inicial", 500)
+            precio_inicial = evento.get("precio_inicial")
             opciones_precios = [(item['value'], item['label']) for item in evento.get("precios", [])]
-            opciones_comidas = [(item['value'], item['label']) for item in evento.get("comidas", [])]
+            social_1 = evento.get("social_1")
+            social_2 = evento.get("social_2")
         else:
             print(f"ERROR - No se encontró un evento con el código especificado.")
-            precio_inicial = 500
             opciones_precios = []
-            opciones_comidas = []
 
         # Configurar campos dinámicos
         self.fields['precioModality'] = forms.ChoiceField(
@@ -63,19 +68,21 @@ class PrecioFormEvento3(forms.Form):
             label="If you present paper/s, tell us the number ID of it or them:",
         )
 
-        self.fields['comida'] = forms.ChoiceField(
-            widget=forms.RadioSelect(),
-            initial=0,
-            choices=opciones_comidas,
-            label="Are you attending the lunch on 5 June?"
-        )
+        if social_1:
+            self.fields['social_1'] = forms.ChoiceField(
+                widget=forms.RadioSelect(),
+                initial=0,
+                choices=opciones_social,
+                label=social_1
+            )
 
-        self.fields['cena'] = forms.ChoiceField(
-            widget=forms.RadioSelect(),
-            initial=0,
-            choices=opciones_comidas,
-            label="Are you attending the dinner on 6 June?"
-        )        
+        if social_2:
+            self.fields['social_2'] = forms.ChoiceField(
+                widget=forms.RadioSelect(),
+                initial=0,
+                choices=opciones_social,
+                label=social_2
+            )        
 
         self.fields['intolerancias'] = forms.CharField(
             required=False,
