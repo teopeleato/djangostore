@@ -37,7 +37,13 @@
                         <p class="h4">Please select the corresponding options for your registration:</p>
                         {% for field in form %}
                             <div class="fieldWrapper question">
-                                {{ field.errors }}
+                                {% if field.errors %}
+                                    <div class="errors">
+                                        {% for error in field.errors %}
+                                            <p class="error">{{ error }}</p> <!-- Mostrar los errores de este campo -->
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                                 <div class="etiqueta">{{ field.label_tag }}</div>    
                                 <div class="campo">{{ field }}</div>
                             </div>

@@ -2,24 +2,83 @@
     "eventos": [
         {
             "codigo_i3a": 2,
-            "social_1": "Are you attending the lunch on 5 June?",
             "precios": [
                 {"value": 50, "label": "Student - 50 €"},
                 {"value": 288, "label": "Standard - 288 €"}
             ],
-            "precio_inicial": 288
+            "precio_inicial": 288,
+            "sociales": [
+                {
+                    "name": "comida", 
+                    "label": "Are you attending the lunch on 5 June?", 
+                    "type": "ChoiceField", 
+                    "choices": [[1, "Yes"], [0, "No"]]
+                }
+            ]
         },
         {
             "codigo_i3a": 3,
-            "social_1": "Are you attending the visit to Aljaferia?",
-            "social_2": "Are you attending the Gala Dinner?",
-            "precios": [
-                {"value": 90, "label": "Student - 90 €"},
-                {"value": 500, "label": "Standard - 500 €"},
-                {"value": 81, "label": "Student and member - 81 € (-10% inc.)"},
-                {"value": 450, "label": "Standard and member - 450 € (-10% inc.)"}
-            ],
-            "precio_inicial": 500
+            "precio_inicial": 0,            
+            "campos": [
+                {
+                    "precios": [
+                        {"value": 90, "label": "Student - 90 €"},
+                        {"value": 500, "label": "Standard - 500 €"},
+                        {"value": 81, "label": "Student and member - 81 € (-10% inc.)"},
+                        {"value": 450, "label": "Standard and member - 450 € (-10% inc.)"}
+                    ]
+                },
+                {
+                    "name": "name", 
+                    "label": "Name:",
+                    "type": "CharField",
+                    "required": "True"
+                },
+                {
+                    "name": "surname", 
+                    "label": "Surname:",
+                    "type": "CharField",
+                    "required": "True"
+                },
+                {
+                    "name": "email", 
+                    "label": "Email:", 
+                    "type": "EmailField", 
+                    "widget": "emailinput",
+                    "required": "True"
+                },
+                {
+                    "name": "paper", 
+                    "label": "If you present paper/s, tell us the number ID of it or them:",
+                    "type": "CharField"
+                },
+                {
+                    "name": "aljaferia", 
+                    "label": "Are you attending the visit to Aljaferia?", 
+                    "type": "ChoiceField", 
+                    "choices": [[1, "Yes"], [0, "No"]],
+                    "required": "True"
+                },
+                {
+                    "name": "cena_gala", 
+                    "label": "Are you attending the Gala Dinner?", 
+                    "type": "ChoiceField", 
+                    "choices": [[1, "Yes"], [0, "No"]],
+                    "required": "True"
+                },
+                {
+                    "name": "intolerancias", 
+                    "label": "Tell us if you want a vegan or vegetarian menu. And if you have any food allergy or intolerance:", 
+                    "type": "CharField",
+                    "widget": "textarea"
+                },
+                {
+                    "name": "comentarios",
+                    "label": "Additional comments:",
+                    "type": "CharField",
+                    "widget": "textarea"
+                }
+            ]
         }
     ]
 }

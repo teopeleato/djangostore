@@ -5,6 +5,14 @@ import json
 
 
 class PrecioFormEvento(forms.Form):
+
+    # Mapear widgets del JSON a widgets de Django
+    WIDGET_MAPPING = {
+        "textarea": forms.Textarea(attrs={'rows': 3, 'cols': 35}),
+        "textinput": forms.TextInput(),
+        "emailinput": forms.EmailInput(),
+    }
+
     # Constructor
     def __init__(self, codigo_i3a=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -16,8 +24,11 @@ class PrecioFormEvento(forms.Form):
         # Configurar campos dinámicos
         self.configure_dynamic_fields(evento)
 
+        # Agregar un asterisco rojo a los campos requeridos
+        self.add_required_asterisk()
+
     def load_json_data(self):
-        """Carga los datos del archivo JSON."""
+        # Carga los datos del archivo JSON
         json_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../static/files/options.json'))
         try:
             with open(json_file_path, 'r') as f:
@@ -32,9 +43,9 @@ class PrecioFormEvento(forms.Form):
             print(f"ERROR - Problema al cargar el archivo JSON: {e}")
             return {"eventos": []}
 
+    # Obtener los datos del evento según el código
     def get_event_data(self, data, codigo_i3a):
-        """Obtiene los datos del evento según el código."""
-        print(f"DEBUG - Valor de codigo_i3a: {codigo_i3a}")
+        # print(f"DEBUG - Valor de codigo_i3a: {codigo_i3a}")
         return next((evento for evento in data.get("eventos", []) if evento["codigo_i3a"] == codigo_i3a), None)
 
     def configure_dynamic_fields(self, evento):
@@ -44,55 +55,65 @@ class PrecioFormEvento(forms.Form):
             (0,'No'),
         ]
         
-        """Configura los campos dinámicos según los datos del evento."""
+        # Configurar campos dinámicos
         if evento:
-            print(f"DEBUG - Evento seleccionado: {evento}")
+            # print(f"DEBUG - Evento seleccionado: {evento}")
             precio_inicial = evento.get("precio_inicial")
             opciones_precios = [(item['value'], item['label']) for item in evento.get("precios", [])]
-            social_1 = evento.get("social_1")
-            social_2 = evento.get("social_2")
+            campos = evento.get("campos", [])
         else:
             print(f"ERROR - No se encontró un evento con el código especificado.")
+            precio_inicial = 0
             opciones_precios = []
+            campos = []
+               
+        # Crear dinámicamente los campos sociales según el tipo definido en el JSON
+        for campo in campos:
 
-        # Configurar campos dinámicos
-        self.fields['precioModality'] = forms.ChoiceField(
-            widget=forms.RadioSelect(),
-            choices=opciones_precios,
-            initial=precio_inicial,
-            label="Modality:"
-        )
+            # Configurar el campo de precios
+            if "precios" in campo:
+                opciones_precios = [(item['value'], item['label']) for item in campo["precios"]]
+                self.fields['precioModality'] = forms.ChoiceField(
+                    widget=forms.RadioSelect(),
+                    choices=opciones_precios,
+                    label="Select a pricing option"
+                )
 
-        self.fields['papers'] = forms.CharField(
-            required=False,
-            label="If you present paper/s, tell us the number ID of it or them:",
-        )
+            # Crear dinámicamente los campos
+            else:
+                field_name = campo['name']  # Nombre del campo
+                field_label = campo['label']  # Etiqueta del campo
+                field_type = campo['type']  # Tipo de campo
+                widget_key = campo.get('widget', 'textinput')  # Widget con Valor predeterminado
+                field_required = campo.get('required', False) == 'True' # Obligatoriedad. Si 'required' es 'True', se asignará True; de lo contrario, se asignará False.
 
-        if social_1:
-            self.fields['social_1'] = forms.ChoiceField(
-                widget=forms.RadioSelect(),
-                initial=0,
-                choices=opciones_social,
-                label=social_1
-            )
+                # Obtener el widget del diccionario de mapeo
+                widget = self.WIDGET_MAPPING.get(widget_key, forms.TextInput())
 
-        if social_2:
-            self.fields['social_2'] = forms.ChoiceField(
-                widget=forms.RadioSelect(),
-                initial=0,
-                choices=opciones_social,
-                label=social_2
-            )        
-
-        self.fields['intolerancias'] = forms.CharField(
-            required=False,
-            widget=forms.Textarea(attrs={
-                'rows':3, 
-                'cols':35,
-            }),
-            label="Tell us if you want a vegan or vegetarian menu. And if you have any food allergy or intolerance:",
-         )
-
+                if field_type == "ChoiceField":
+                    opciones = campo.get("choices", [(1, "Yes"), (0, "No")])  # Valores predeterminados
+                    self.fields[field_name] = forms.ChoiceField(
+                        widget=forms.RadioSelect(),
+                        required=field_required,
+                        choices=opciones,
+                        label=field_label
+                    )
+                elif field_type == "CharField":
+                    self.fields[field_name] = forms.CharField(
+                        required=field_required,
+                        label=field_label,
+                        widget=widget
+                    )
+                elif field_type == "EmailField":
+                    self.fields[field_name] = forms.EmailField(
+                        required=field_required,
+                        label=field_label,
+                        widget=widget
+                    )
+                else:
+                    print(f"WARNING - Tipo de campo desconocido: {field_type}")
+        
+        # Campo precioFinal
         self.fields['precioFinal'] = forms.IntegerField(
             required=False,
             label=mark_safe('Total to pay in &#8364;:'),
@@ -103,3 +124,8 @@ class PrecioFormEvento(forms.Form):
                 'readonly': 'readonly'
             }),
         )
+    # Agrega un asterisco rojo a los campos obligatorios
+    def add_required_asterisk(self):
+            for field_name, field in self.fields.items():
+                if field.required:
+                    field.label = mark_safe(f"<span class='asterisco'>*</span> {field.label}")

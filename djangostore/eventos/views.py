@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Evento
-from .forms import PrecioFormEvento1, PrecioFormEvento2, PrecioFormEvento3, PrecioFormEvento
+from .forms import PrecioFormEvento
 from django.views.decorators.csrf import csrf_exempt
 import logging
 
@@ -18,31 +18,34 @@ def lista_eventos(request):
 '''
 
 def detalle_evento(request, codigo_i3a):
+    # Obtener el evento a partir del código
     evento = get_object_or_404(Evento,codigo_i3a=codigo_i3a)
 
     if request.method == "POST":
-        # Recojo el valor nuevoPrecio del data enviado por ajax
-        nuevo_precio = request.POST.get('nuevoPrecio')  
-        # print(f"Nuevo precio recibido: {nuevo_precio}")
 
-        # Devolver la respuesta JSON para actualizar el precio en el cliente
+        # Solo procesamos el nuevo precio enviado por AJAX
+        nuevo_precio = request.POST.get('nuevoPrecio')
+
+        # Procesar el precio o realizar cualquier cálculo que necesites (si es necesario)
+        # Aquí solo devolvemos el precio recibido, en caso de que quieras realizar validaciones adicionales, puedes agregarlas aquí
+
         return JsonResponse({
-            'mensaje': 'Precio recibido correctamente', 
+            'mensaje': 'Precio recibido correctamente',
             'nuevoPrecio': nuevo_precio
         })
+    
+  
 
-    # Lógica para seleccionar formulario según el evento, con solicitudes GET normales
-    """ if evento.codigo_i3a == 1:
-        PrecioForm = PrecioFormEvento1
-    if evento.codigo_i3a == 2:
-        PrecioForm = PrecioFormEvento2
-    if evento.codigo_i3a == 3:
-        PrecioForm = PrecioFormEvento3 """
-    PrecioForm = PrecioFormEvento
+        
 
-    # Cargo el evento con su formulario
-    form = PrecioForm(codigo_i3a=evento.codigo_i3a) 
-    return render(request, 'eventos/detalle_evento.html', {
-        'evento': evento, 
-        'form': form
-    }) 
+    else:
+
+        # Lógica para seleccionar formulario según el evento, con solicitudes GET normales    
+        PrecioForm = PrecioFormEvento
+
+        # Cargo el evento con su formulario
+        form = PrecioForm(codigo_i3a=evento.codigo_i3a) 
+        return render(request, 'eventos/detalle_evento.html', {
+            'evento': evento, 
+            'form': form
+        }) 
